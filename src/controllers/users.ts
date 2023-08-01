@@ -1,6 +1,6 @@
+import bcrypt from 'bcrypt';
 import prisma from '../client';
 import { ApiMethod } from '../interfaces/api';
-
 export const GET: ApiMethod = {
 
     "/": async (req, res) => {
@@ -43,9 +43,11 @@ export const POST: ApiMethod = {
 
     "/": async (req, res) => {
 
-        const { body } = req;
+        const { body: { password, ...body } } = req;
 
-        const created = await prisma.users.create({ data: body });
+        const encrypted = await bcrypt.hash(password, 10)
+
+        const created = await prisma.users.create({ data: { password: encrypted, ...body } });
 
         return res.status(200).json(created);
 
