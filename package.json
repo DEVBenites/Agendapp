@@ -4,7 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "npx ts-node-dev --respawn  --ignore-watch node_modules src"
+    "dev": "npx ts-node-dev --respawn  --ignore-watch node_modules src",
+    "startTs": "npx ts-node-dev src"
   },
   "dependencies": {
     "@prisma/client": "4.16.2",
